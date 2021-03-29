@@ -9,6 +9,9 @@ import java.util.Map;
 import java.util.*;
 import java.util.Arrays;
 import java.util.LinkedList;
+import java.util.regex.Pattern;
+
+import static com.company.Kontakt.vyhledejCastKontaktu;
 
 
 public class Main {
@@ -24,9 +27,9 @@ public class Main {
         Kontakt kontakt5 = new Kontakt("+420612533434", "Rodice - pevna", "", "RODINA");
 
 
-//definice seznamu
+        //definice seznamu
         //  List<Kontakt> list = new ArrayList<>();
-        Set<Kontakt> list = new HashSet<>();
+        Set<com.company.Kontakt> list = new HashSet<>();
 
         list.add(kontakt1);
         list.add(kontakt2);
@@ -34,48 +37,69 @@ public class Main {
         list.add(kontakt4);
         list.add(kontakt5);
 
-//pridani kontaktu do listu
-//        pridejDoSeznamu(list, kontakt1);
-//        pridejDoSeznamu(list, kontakt2);
-//        pridejDoSeznamu(list, kontakt3);
-//        pridejDoSeznamu(list, kontakt4);
-//        pridejDoSeznamu(list, kontakt5);
 
-        Map<String, Kontakt> mapa = new HashMap<>();
-        mapa.put(kontakt1.telNumber, kontakt1);
-        mapa.put(kontakt2.telNumber, kontakt2);
-        mapa.put(kontakt3.telNumber, kontakt3);
-        mapa.put(kontakt4.telNumber, kontakt4);
-        mapa.put(kontakt5.telNumber, kontakt5);
+        Map<String, com.company.Kontakt> mapaTel = new HashMap<>();
+        mapaTel.put(kontakt1.telNumber, kontakt1);
+        mapaTel.put(kontakt2.telNumber, kontakt2);
+        mapaTel.put(kontakt3.telNumber, kontakt3);
+        mapaTel.put(kontakt4.telNumber, kontakt4);
+        mapaTel.put(kontakt5.telNumber, kontakt5);
+
+        Map<String, com.company.Kontakt> mapaJmeno = new HashMap<>();
+        mapaJmeno.put(kontakt1.jmeno, kontakt1);
+        mapaJmeno.put(kontakt2.jmeno, kontakt2);
+        mapaJmeno.put(kontakt3.jmeno, kontakt3);
+        mapaJmeno.put(kontakt4.jmeno, kontakt4);
+        mapaJmeno.put(kontakt5.jmeno, kontakt5);
+
+        Map<String, com.company.Kontakt> mapaPrijmeni = new HashMap<>();
+        mapaPrijmeni.put(kontakt1.prijmeni, kontakt1);
+        mapaPrijmeni.put(kontakt2.prijmeni, kontakt2);
+        mapaPrijmeni.put(kontakt3.prijmeni, kontakt3);
+        mapaPrijmeni.put(kontakt4.prijmeni, kontakt4);
+        mapaPrijmeni.put(kontakt5.prijmeni, kontakt5);
+
+        Map<String, com.company.Kontakt> mapaKategorie = new HashMap<>();
+        mapaKategorie.put(kontakt1.kategorie, kontakt1);
+        mapaKategorie.put(kontakt2.kategorie, kontakt2);
+        mapaKategorie.put(kontakt3.kategorie, kontakt3);
+        mapaKategorie.put(kontakt4.kategorie, kontakt4);
+        mapaKategorie.put(kontakt5.kategorie, kontakt5);
 
 
         //hledam kontakt s tel +420602111222
-       String hledaneCislo = new String("+420602222345");
+       String hledaneCislo = new String("+420602111222");
+       String hledaneJmenoPrijmeni = new String("Zeleny");
+       String hledanaCastTel = new String("+4206025532");
+
+//        Pattern p = Pattern.compile(hledanaCastTel);
+//
+//        for (String key : mapaTel.keySet()) {
+//            if(p.matcher(key).matches()) {
+//                mapaTel.add(key);
+//            }
+//
+//        }
+//        System.out.println(mapaTel.get(p.key));
 
        //pomocné znázornění IF - zda mám dobře napsaný IF
-        if (mapa.containsKey(hledaneCislo)) {
-            System.out.println("Hledané tel. číslo " + hledaneCislo + " má přiřazený " + mapa.get(hledaneCislo));
-        } else {
-            System.out.println("Kontakt není v seznamu");
-        }
+//        if (mapa.containsKey(hledaneCislo)) {
+//            System.out.println("Hledané tel. číslo " + hledaneCislo + " má přiřazený " + mapa.get(hledaneCislo));
+//        } else {
+//            System.out.println("Kontakt není v seznamu");
+//        }
 
-//metoda volaná pro hledání tel. čísla
-        vyhledejKontakt(hledaneCislo);
+//metoda hledá telefoni cislo
+       com.company.Kontakt.vyhledejKontakt(mapaTel,hledaneCislo);
 
+//metoda hledá Jmeno nebo Prijmeni
+        com.company.Kontakt.vyhledejJmenoPrijmeni(mapaJmeno, mapaPrijmeni, hledaneJmenoPrijmeni);
+
+        com.company.Kontakt.vyhledejCastKontaktu(mapaTel, hledanaCastTel);
 
 
     }
 
-    //metoda na hledani kontaktu podle promenené hledaneCislo
-    //nefunguje!
-    public  static void vyhledejKontakt(Map<String, Kontakt> mapa, String hledaneCislo) {
-
-        if (mapa.containsKey(hledaneCislo)) {
-            System.out.println("Hledané tel. číslo " + hledaneCislo + " má přiřazený " + mapa.get(hledaneCislo));
-        } else {
-            System.out.println("Kontakt není v seznamu");
-        }
-    }
 
 
 }
